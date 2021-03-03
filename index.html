@@ -39,59 +39,78 @@
 <body>
 
     <script>
-        var rotation;
+        var x;
 
-        var maxSize;
+        var BALLS;
 
-        var minSize;
+        var xPositions;
 
-        var currSize;
+        var yPositions;
 
-        var ease;
+        var xSpeeds;
+
+        var ySpeeds;
+
+        var sizes;
+
+        var colors;
 
         function setup() {
             initializeFields();
             createCanvas(windowWidth, windowHeight);
-            background(0);
-            fill(255, 255, 255, 1.9);
-            stroke(0, 0, 0, 126);
+            strokeWeight(1);
+            resetApp();
+            noFill();
+            rectMode(CENTER);
+            frameRate(12);
         }
 
         function draw() {
             fill(0, 0, 0, 20);
-            rect(-2, -2, 800, 800);
-            fill(255, 255, 255, 1);
-            if (mouseIsPressed) {
-                currSize += ((maxSize - currSize) * ease);
-                drawBlackHole(width / 2, height / 2, currSize);
+            rect(width / 2, height / 2, width, height);
+            for (var i = 0; i < BALLS; i++) {
+                fill(colors[i]);
+                rect(xPositions[i], yPositions[i], sizes[i], sizes[i]);
+                var radius = sizes[i] + 0.5;
+                if (xPositions[i] < radius || xPositions[i] > width - radius) {
+                    // rebota x
+                    xSpeeds[i] *= -2;
+                }
+                if (yPositions[i] < radius || yPositions[i] > height - radius) {
+                    // rebota y
+                    ySpeeds[i] *= -2;
+                }
+                sizes[i] += 0.1;
             }
         }
 
-        function drawBlackHole(x, y, size) {
-            translate(x, y);
-            for (var i = 0; i < 10; i++) {
-                rotation += random(0.05, 0.1);
-                rotate(rotation);
-                ellipse(0, 0, random(1, 300 * size), 400 * size);
-                rotate(rotation + 90);
-                ellipse(0, 0, random(1, 300 * size), 400 * size);
-            }
-            // saveFrame("BlackHole####.png");
+        function mousePressed() {
+            resetApp();
         }
 
-        function mouseReleased() {
-            currSize = minSize;
-            background(0);
-
+        function resetApp() {
+            for (var i = 0; i < BALLS; i++) {
+                xPositions[i] = random(width);
+                yPositions[i] = random(height);
+                xSpeeds[i] = random(-10, 10);
+                ySpeeds[i] = random(-10, 10);
+                sizes[i] = random(0, 100);
+                colors[i] = color(255);
+            }
         }
 
         function initializeFields() {
-            rotation = 0;
-            maxSize = 0.5;
-            minSize = 0.1;
-            currSize = 0.1;
-            ease = 0.1;
+            x = 0;
+            BALLS = 100;
+            xPositions = new Array(BALLS);
+            yPositions = new Array(BALLS);
+            xSpeeds = new Array(BALLS);
+            ySpeeds = new Array(BALLS);
+            sizes = new Array(BALLS);
+            colors = new Array(BALLS);
         }
+
+
 
         function windowResized() {
             resizeCanvas(windowWidth, windowHeight);
