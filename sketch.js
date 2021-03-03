@@ -1,79 +1,63 @@
-var x;
+    x = 100
+    y = 100
+    angulo = 0;
 
-var BALLS;
-
-var xPositions;
-
-var yPositions;
-
-var xSpeeds;
-
-var ySpeeds;
-
-var sizes;
-
-var colors;
-
-function setup() {
-    initializeFields();
-    createCanvas(windowWidth, windowHeight);
-    strokeWeight(3);
-    resetApp();
-    noFill();
-    rectMode(CENTER);
-    frameRate(12);
-}
-
-function draw() {
-    fill(0, 0, 0, 20);
-    rect(width / 2, height / 2, width, height);
-    for (var i = 0; i < BALLS; i++) {
-        fill(colors[i]);
-        rect(xPositions[i], yPositions[i], sizes[i], sizes[i]);
-        var radius = sizes[i] + 0.5;
-        if (xPositions[i] < radius || xPositions[i] > width - radius) {
-            // rebota x
-            xSpeeds[i] *= -1;
-        }
-        if (yPositions[i] < radius || yPositions[i] > height - radius) {
-            // rebota y
-            ySpeeds[i] *= -1;
-        }
-        sizes[i] += 0.1;
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+        colorfondo = color(255, 181, 0, 10);
+        colorBola = color(255, 0, 0);
+        noStroke();
     }
-}
 
-function mousePressed() {
-    resetApp();
-}
+    function draw() {
+        background(colorfondo);
+        // if ( keyIsPressed == true ) {
+        //   //colorfondo = random(0, 255)
+        //   x += 2;
+        //   angulo += 0.4;
+        // }
 
-function resetApp() {
-    for (var i = 0; i < BALLS; i++) {
-        xPositions[i] = random(width);
-        yPositions[i] = random(height);
-        xSpeeds[i] = random(-10, 10);
-        ySpeeds[i] = random(-10, 10);
-        sizes[i] = random(0, 100);
-        colors[i] = color(255);
+        if (keyIsDown(LEFT_ARROW)) {
+            x -= 2;
+            angulo -= 0.4;
+        }
+
+        if (keyIsDown(RIGHT_ARROW)) {
+            x += 2;
+            angulo += 0.4;
+        }
+
+        if (keyIsDown(UP_ARROW)) {
+            y -= 2;
+            angulo -= 0.4;
+        }
+
+        if (keyIsDown(DOWN_ARROW)) {
+            y += 2;
+            angulo += 0.4;
+        }
+
+        fill(colorBola)
+
+        push()
+        translate(x, y)
+        rotate(angulo)
+        arc(0, 0, 30, 30, 0, PI)
+        pop()
     }
-}
 
-function keyPressed() {
-    save("saturation.png" + frameCount + ".png");
-}
+    function keyPressed() {
+        //colorfondo = random(0, 255)
+        colorBola = color(0, 0, 0);
+    }
 
-function initializeFields() {
-    x = 0;
-    BALLS = 100;
-    xPositions = new Array(BALLS);
-    yPositions = new Array(BALLS);
-    xSpeeds = new Array(BALLS);
-    ySpeeds = new Array(BALLS);
-    sizes = new Array(BALLS);
-    colors = new Array(BALLS);
-}
+    function keyReleased() {
+        //colorfondo = 255;
+        colorBola = color(255, 0, 0);
+    }
 
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-
-}
+    function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+        x = width / 2
+        y = height / 2
+    } <

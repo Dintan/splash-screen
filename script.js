@@ -16,6 +16,7 @@ var colors;
 
 function setup() {
     initializeFields();
+    createCanvas(windowWidth, windowHeight);
     strokeWeight(3);
     resetApp();
     noFill();
@@ -69,5 +70,10 @@ function initializeFields() {
     xSpeeds = new Array(BALLS);
     ySpeeds = new Array(BALLS);
     sizes = new Array(BALLS);
-    colors = new Array(BALLS);
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    x = width / 2
+    y = height / 2
 }
