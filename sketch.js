@@ -60,4 +60,4 @@
         resizeCanvas(windowWidth, windowHeight);
         x = width / 2
         y = height / 2
-    } <
+    }
