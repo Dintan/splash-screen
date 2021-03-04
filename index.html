@@ -30,85 +30,74 @@
             padding: 0;
         }
         
+        h1 {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: lighter;
+            font-family: sans-serif;
+        }
+        
         canvas {
             display: block;
         }
     </style>
 </head>
 
+
 <body>
 
+
     <script>
-        var x;
+        var angle
 
-        var BALLS;
-
-        var xPositions;
-
-        var yPositions;
-
-        var xSpeeds;
-
-        var ySpeeds;
-
-        var sizes;
-
-        var colors;
+        var r = random(255);
+        var g = random(255);
+        var b = random(255);
 
         function setup() {
-            initializeFields();
             createCanvas(windowWidth, windowHeight);
-            strokeWeight(1);
-            resetApp();
-            noFill();
-            rectMode(CENTER);
-            frameRate(12);
+
+
         }
 
         function draw() {
-            fill(0, 0, 0, 20);
-            rect(width / 2, height / 2, width, height);
-            for (var i = 0; i < BALLS; i++) {
-                fill(colors[i]);
-                rect(xPositions[i], yPositions[i], sizes[i], sizes[i]);
-                var radius = sizes[i] + 0.5;
-                if (xPositions[i] < radius || xPositions[i] > width - radius) {
-                    // rebota x
-                    xSpeeds[i] *= -2;
-                }
-                if (yPositions[i] < radius || yPositions[i] > height - radius) {
-                    // rebota y
-                    ySpeeds[i] *= -2;
-                }
-                sizes[i] += 0.1;
+            background(0);
+            angle = (mouseX / float(width));
+            translate(width / 2, height);
+            branch(190);
+
+        }
+
+        function branch(len) {
+            stroke(255);
+            strokeWeight(0.3);
+            bezier(0, 0, 0, 0, 0, 0, 0, +len);
+            translate(0, -len);
+            if (len > 5) {
+                push();
+                rotate(angle);
+                branch(len * 0.75)
+                pop();
+                push();
+                rotate(-angle);
+                branch(len * 0.75)
+                pop();
+            }
+
+        }
+
+        function keyPressed() {
+            if (keyCode === ENTER) {
+                save("fractal.png" + frameCount + ".png");
+
             }
         }
 
-        function mousePressed() {
-            resetApp();
-        }
-
-        function resetApp() {
-            for (var i = 0; i < BALLS; i++) {
-                xPositions[i] = random(width);
-                yPositions[i] = random(height);
-                xSpeeds[i] = random(-10, 10);
-                ySpeeds[i] = random(-10, 10);
-                sizes[i] = random(0, 100);
-                colors[i] = color(255);
-            }
-        }
-
-        function initializeFields() {
-            x = 0;
-            BALLS = 100;
-            xPositions = new Array(BALLS);
-            yPositions = new Array(BALLS);
-            xSpeeds = new Array(BALLS);
-            ySpeeds = new Array(BALLS);
-            sizes = new Array(BALLS);
-            colors = new Array(BALLS);
-        }
 
 
 
