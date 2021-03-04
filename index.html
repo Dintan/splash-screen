@@ -59,6 +59,12 @@
             translate(windowWidth / 2, windowHeight);
             branch(0.3 * (height, width));
 
+
+            r = random(255);
+            g = random(255);
+            b = random(255);
+
+
         }
 
         function branch(len) {
@@ -68,15 +74,38 @@
             bezier(0, 0, 0, 0, 0, 0, 0, +len);
 
             translate(0, -len);
-            if (len > 5) {
+            if (len > 45) {
                 push();
                 rotate(angle);
-                branch(len * 0.70)
+                branch(len * 0.53)
                 pop();
+
                 push();
                 rotate(-angle);
-                branch(len * 0.70)
+                branch(len * 0.53)
                 pop();
+
+                push();
+                rotate(angle * 2);
+                branch(len * 0.55)
+                pop();
+
+                push();
+                rotate(-angle * 2);
+                branch(len * 0.55)
+                pop();
+
+                push();
+                rotate(angle * 4);
+                branch(len * 0.52)
+                pop();
+
+                push();
+                rotate(-angle * 4);
+                branch(len * 0.52)
+                pop();
+
+
             }
 
         }
@@ -88,7 +117,12 @@
             }
         }
 
+        function mouseMoved() {
 
+            r = random(255);
+            g = random(255);
+            b = random(255);
+        }
 
 
         function windowResized() {
