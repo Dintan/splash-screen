@@ -57,7 +57,7 @@
             background(0);
             angle = (mouseX / float(width));
             translate(windowWidth / 2, windowHeight);
-            branch(0.90 * (height, width));
+            branch(0.3 * (height, width));
 
         }
 
@@ -71,11 +71,11 @@
             if (len > 5) {
                 push();
                 rotate(angle);
-                branch(len * 0.65)
+                branch(len * 0.70)
                 pop();
                 push();
                 rotate(-angle);
-                branch(len * 0.65)
+                branch(len * 0.70)
                 pop();
             }
 
