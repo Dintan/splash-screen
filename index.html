@@ -56,9 +56,10 @@
 
         function draw() {
             background(0);
-            angle = (mouseX / float(width));
+
+            angle = (mouseX / float(width) * mouseY / float(height));
             translate(windowWidth / 2, windowHeight);
-            branch(1 * (windowWidth, mouseY));
+            tree(1 * (windowWidth, mouseY));
 
 
             r = random(255);
@@ -68,42 +69,52 @@
 
         }
 
-        function branch(len) {
+        function tree(len) {
             stroke(255);
             strokeWeight(0.3);
             bezier(0, 0, 0, 0, 0, 0, 0, -len);
-            bezier(0, 0, 0, 0, 0, 0, 0, +len);
+            bezier(0, 0, 0, 0, 0, 0, 0, -len);
 
             translate(0, -len);
-            if (len > 45) {
+            if (len > 60) {
                 push();
                 rotate(angle);
-                branch(len * 0.53)
+                tree(len * 0.53)
                 pop();
 
                 push();
                 rotate(-angle);
-                branch(len * 0.53)
+                tree(len * 0.53)
                 pop();
 
                 push();
                 rotate(angle * 8);
-                branch(len * 0.55)
+                tree(len * 0.55)
                 pop();
 
                 push();
-                rotate(-angle * 2);
-                branch(len * 0.55)
+                rotate(-angle * 8);
+                tree(len * 0.55)
                 pop();
 
                 push();
                 rotate(angle * 43);
-                branch(len * 0.52)
+                tree(len * 0.52)
+                pop();
+
+                push();
+                rotate(-angle * 43);
+                tree(len * 0.52)
                 pop();
 
                 push();
                 rotate(-angle * 80);
-                branch(len * 0.52)
+                tree(len * 0.50)
+                pop();
+
+                push();
+                rotate(-angle * 80);
+                tree(len * 0.50)
                 pop();
 
 
