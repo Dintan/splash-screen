@@ -68,7 +68,6 @@
         #nav {
             opacity: 1;
             transition: opacity 4s ease-in-out;
-            background: black;
         }
         
         #nav.hide {
@@ -134,7 +133,7 @@
 
         function setup() {
             createCanvas(windowWidth, windowHeight);
-            background(0);
+            background(0, 0.5);
 
 
 
@@ -148,6 +147,7 @@
             angle = (mouseX / float(width) * mouseY / float(height));
             translate(windowWidth / 2, windowHeight);
             tree(1 * (windowWidth, mouseY));
+
 
 
             r = random(255);
