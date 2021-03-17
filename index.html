@@ -67,7 +67,7 @@
         
         #nav {
             opacity: 1;
-            transition: opacity 4s ease-in-out;
+            transition: opacity 10s ease-out;
         }
         
         #nav.hide {
@@ -76,7 +76,7 @@
         
         #nav2 {
             opacity: 1;
-            transition: opacity 4s ease-in-out;
+            transition: opacity 10s ease-out;
         }
         
         #nav2.hide {
@@ -110,18 +110,14 @@
     <script>
         $(document).on('mousemove', function() {
             $('#nav').addClass('hide');
-            setTimeout(function() {
-                $('#nav').removeClass('hide');
-            }, 7000);
+
         });
     </script>
 
     <script>
         $(document).on('mousemove', function() {
             $('#nav2').addClass('hide');
-            setTimeout(function() {
-                $('#nav2').removeClass('hide');
-            }, 7000);
+
         });
     </script>
 
